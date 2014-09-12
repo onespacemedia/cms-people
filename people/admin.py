@@ -1,0 +1,53 @@
+from django.contrib import admin
+
+from cms.admin import SearchMetaBaseAdmin, PageBaseAdmin
+
+from .models import Person, Team
+
+
+@admin.register(Person)
+class PersonAdmin(SearchMetaBaseAdmin):
+
+    prepopulated_fields = {"url_title": ("first_name", "last_name",)}
+    filter_horizontal = ("teams",)
+
+    fieldsets = (
+        (None, {
+            "fields": (
+                "page",
+                "title",
+                "first_name",
+                "middle_name",
+                "last_name",
+                "photo",
+                "url_title",
+                "job_title",
+                "bio",
+                "email",
+                "linkedin_username",
+                "skype_username",
+                "twitter_username",
+                "teams",
+            )
+        }),
+        SearchMetaBaseAdmin.PUBLICATION_FIELDS,
+        SearchMetaBaseAdmin.SEO_FIELDS,
+    )
+
+
+@admin.register(Team)
+class TeamAdmin(PageBaseAdmin):
+
+    """Admin settings for the Category model."""
+
+    prepopulated_fields = {"url_title": ("title",)}
+
+    fieldsets = (
+        PageBaseAdmin.TITLE_FIELDS,
+        ("Content", {
+            "fields": ("content_primary",),
+        }),
+        PageBaseAdmin.PUBLICATION_FIELDS,
+        PageBaseAdmin.NAVIGATION_FIELDS,
+        PageBaseAdmin.SEO_FIELDS,
+    )
