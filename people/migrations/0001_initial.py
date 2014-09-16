@@ -10,8 +10,8 @@ import cms.models.fields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pages', '0002_auto_20140909_1136'),
-        ('media', '0001_initial'),
+        ('pages', '__first__'),
+        ('media', '__first__'),
     ]
 
     operations = [
