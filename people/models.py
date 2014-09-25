@@ -1,7 +1,7 @@
 from django.db import models
 
 from cms.models import SearchMetaBase, HtmlField
-from cms.apps.pages.models import ContentBase, PageBase
+from cms.apps.pages.models import ContentBase, PageBase, Page
 from cms.apps.media.models import ImageRefField
 
 
@@ -17,23 +17,13 @@ class Team(PageBase):
 
 class People(ContentBase):
 
-    header_text = HtmlField(
-        blank=True,
-        null=True
-    )
-
-    footer_text = HtmlField(
-        blank=True,
-        null=True
-    )
-
     urlconf = "people.urls"
 
 
 class Person(SearchMetaBase):
 
     page = models.ForeignKey(
-        People,
+        Page,
     )
 
     title = models.CharField(
@@ -112,17 +102,22 @@ class Person(SearchMetaBase):
         null=True
     )
 
+    order = models.PositiveIntegerField(
+        default=0
+    )
+
+    class Meta:
+        ordering = ('order',)
+        verbose_name_plural = "people"
+
     def __unicode__(self):
         return u"{} {}".format(
             self.first_name,
             self.last_name
         )
 
-    class Meta:
-        verbose_name_plural = "people"
-
     def get_absolute_url(self):
         return "{}{}/".format(
-            self.page.page.get_absolute_url(),
+            self.page.get_absolute_url(),
             self.url_title
         )

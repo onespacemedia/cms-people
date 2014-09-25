@@ -1,0 +1,17 @@
+{% load assets %}
+
+<ul class="medium-block-grid-6">
+    {% for person in people %}
+
+        {% get_img person.photo.file as photo %}
+
+        <li>
+            <div>
+                <div style="background-image: url({{ photo.url }})"></div>
+                <h5>{{ person }}</h5>
+                <a href="">View profile</a>
+            </div>
+        </li>
+    {% endfor %}
+
+</ul>

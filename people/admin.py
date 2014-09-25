@@ -32,6 +32,7 @@ class PersonAdmin(SearchMetaBaseAdmin):
                 "job_title",
                 "bio",
                 "teams",
+                "order",
             )
         }),
         ('Contact details', {
