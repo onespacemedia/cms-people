@@ -15,19 +15,31 @@ class PersonAdmin(SearchMetaBaseAdmin):
         (None, {
             "fields": (
                 "page",
+            )
+        }),
+        ('Name information', {
+            'fields': (
                 "title",
                 "first_name",
                 "middle_name",
                 "last_name",
-                "photo",
                 "url_title",
+            )
+        }),
+        ('Additional information', {
+            'fields': (
+                "photo",
                 "job_title",
                 "bio",
+                "teams",
+            )
+        }),
+        ('Contact details', {
+            'fields': (
                 "email",
                 "linkedin_username",
                 "skype_username",
                 "twitter_username",
-                "teams",
             )
         }),
         SearchMetaBaseAdmin.PUBLICATION_FIELDS,
