@@ -21,4 +21,3 @@ class TeamView(DetailView):
     model = Team
     slug_field = 'url_title'
     slug_url_kwarg = 'team_title'
-1
