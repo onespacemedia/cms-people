@@ -1,3 +1,5 @@
+""" Models used by the people app """
+
 from django.db import models
 
 from cms.models import SearchMetaBase, HtmlField
@@ -7,7 +9,7 @@ from cms.apps.media.models import ImageRefField
 
 class Team(PageBase):
 
-    """ A team for people to be a part of. """
+    """ A team for Person('s) to be a part of """
 
     content_primary = HtmlField(
         "primary content",
@@ -17,13 +19,17 @@ class Team(PageBase):
 
 class People(ContentBase):
 
+    """ A list of Person('s) """
+
     urlconf = "people.urls"
 
 
 class Person(SearchMetaBase):
 
+    """ A person page """
+
     page = models.ForeignKey(
-        Page,
+        Page
     )
 
     title = models.CharField(
@@ -117,6 +123,12 @@ class Person(SearchMetaBase):
         )
 
     def get_absolute_url(self):
+        """ Gets the url of Person
+
+        Returns:
+            url of Person
+
+        """
         return "{}{}/".format(
             self.page.get_absolute_url(),
             self.url_title

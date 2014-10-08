@@ -1,3 +1,5 @@
+""" Admin settings for the people app """
+
 from django.contrib import admin
 
 from cms.admin import SearchMetaBaseAdmin, PageBaseAdmin
@@ -7,6 +9,7 @@ from .models import Person, Team
 
 @admin.register(Person)
 class PersonAdmin(SearchMetaBaseAdmin):
+    """ Admin settings for the Person model """
 
     prepopulated_fields = {"url_title": ("first_name", "last_name",)}
     filter_horizontal = ("teams",)
@@ -51,7 +54,7 @@ class PersonAdmin(SearchMetaBaseAdmin):
 @admin.register(Team)
 class TeamAdmin(PageBaseAdmin):
 
-    """Admin settings for the Category model."""
+    """Admin settings for the Team model."""
 
     prepopulated_fields = {"url_title": ("title",)}
 

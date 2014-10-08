@@ -1,3 +1,5 @@
+""" URLs used by the people app """
+
 from django.conf.urls import patterns, url
 
 import views
