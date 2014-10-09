@@ -1,5 +1,4 @@
 """ Models used by the people app """
-
 from django.db import models
 
 from cms.models import SearchMetaBase, HtmlField
@@ -8,8 +7,7 @@ from cms.apps.media.models import ImageRefField
 
 
 class Team(PageBase):
-
-    """ A team for Person('s) to be a part of """
+    """ A team for Person's to be a part of """
 
     content_primary = HtmlField(
         "primary content",
@@ -18,15 +16,17 @@ class Team(PageBase):
 
 
 class People(ContentBase):
+    """ A base for Person's """
 
-    """ A list of Person('s) """
+    # The heading that the admin places this content under.
+    classifier = "apps"
 
+    # The urlconf used to power this content's views.
     urlconf = "people.urls"
 
 
 class Person(SearchMetaBase):
-
-    """ A person page """
+    """ A person """
 
     page = models.ForeignKey(
         Page
