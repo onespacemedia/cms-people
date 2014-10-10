@@ -24,6 +24,18 @@ class People(ContentBase):
     # The urlconf used to power this content's views.
     urlconf = "people.urls"
 
+    standfirst = models.TextField(
+        blank=True,
+        null=True
+    )
+
+    per_page = models.IntegerField(
+        "people per page",
+        default=5,
+        blank=True,
+        null=True
+    )
+
 
 class Person(SearchMetaBase):
     """ A person """

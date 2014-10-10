@@ -8,6 +8,10 @@ class PersonListView(ListView):
     """ A list of all Person's """
     model = Person
 
+    def get_paginate_by(self, queryset):
+        """Returns the number of jobs to show per page."""
+        return self.request.pages.current.content.per_page
+
 
 class PersonView(DetailView):
     """ An individual Person """
