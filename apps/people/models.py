@@ -22,7 +22,7 @@ class People(ContentBase):
     classifier = "apps"
 
     # The urlconf used to power this content's views.
-    urlconf = "people.urls"
+    urlconf = "{{ project_name }}.people.urls"
 
     standfirst = models.TextField(
         blank=True,
