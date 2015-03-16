@@ -10,17 +10,17 @@ import cms.models.fields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pages', '__first__'),
-        ('media', '__first__'),
+        ('pages', '0001_initial'),
+        ('media', '0001_initial'),
     ]
 
     operations = [
         migrations.CreateModel(
             name='People',
             fields=[
-                ('page', models.OneToOneField(related_name=b'+', primary_key=True, serialize=False, editable=False, to='pages.Page')),
-                ('header_text', cms.models.fields.HtmlField(null=True, blank=True)),
-                ('footer_text', cms.models.fields.HtmlField(null=True, blank=True)),
+                ('page', models.OneToOneField(related_name='+', primary_key=True, serialize=False, editable=False, to='pages.Page')),
+                ('standfirst', models.TextField(null=True, blank=True)),
+                ('per_page', models.IntegerField(default=5, null=True, verbose_name=b'people per page', blank=True)),
             ],
             options={
                 'abstract': False,
@@ -45,17 +45,18 @@ class Migration(migrations.Migration):
                 ('middle_name', models.CharField(max_length=256, null=True, blank=True)),
                 ('last_name', models.CharField(max_length=256, null=True, blank=True)),
                 ('job_title', models.CharField(max_length=256, null=True, blank=True)),
-                ('bio', models.TextField(null=True, blank=True)),
-                ('url_title', models.CharField(unique=True, max_length=256)),
+                ('bio', cms.models.fields.HtmlField(null=True, blank=True)),
+                ('url_title', models.CharField(unique=True, max_length=256, verbose_name=b'URL title')),
                 ('email', models.CharField(max_length=100, null=True, blank=True)),
                 ('linkedin_username', models.CharField(max_length=100, null=True, blank=True)),
                 ('skype_username', models.CharField(max_length=100, null=True, blank=True)),
                 ('twitter_username', models.CharField(max_length=100, null=True, blank=True)),
-                ('page', models.ForeignKey(to='people.People')),
-                ('photo', cms.apps.media.models.ImageRefField(related_name=b'+', on_delete=django.db.models.deletion.PROTECT, blank=True, to='media.File', null=True)),
+                ('order', models.PositiveIntegerField(default=0)),
+                ('page', models.ForeignKey(to='pages.Page')),
+                ('photo', cms.apps.media.models.ImageRefField(related_name='+', on_delete=django.db.models.deletion.PROTECT, blank=True, to='media.File', null=True)),
             ],
             options={
-                'verbose_name': 'person',
+                'ordering': ('order',),
                 'verbose_name_plural': 'people',
             },
             bases=(models.Model,),
@@ -79,8 +80,7 @@ class Migration(migrations.Migration):
                 ('content_primary', cms.models.fields.HtmlField(verbose_name=b'primary content', blank=True)),
             ],
             options={
-                'verbose_name': 'Team',
-                'verbose_name_plural': 'Teams',
+                'abstract': False,
             },
             bases=(models.Model,),
         ),
