@@ -50,7 +50,9 @@ class PersonAdmin(SearchMetaBaseAdmin):
 @admin.register(Team)
 class TeamAdmin(PageBaseAdmin):
 
-    prepopulated_fields = {"url_title": ("title",)}
+    prepopulated_fields = {
+        "slug": ("title",)
+    }
 
     fieldsets = (
         PageBaseAdmin.TITLE_FIELDS,
