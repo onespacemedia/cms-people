@@ -1,7 +1,6 @@
-""" URLs used by the people app """
 from django.conf.urls import url
 
-import views
+from . import views
 
 urlpatterns = [
     url(r"^teams/$", views.TeamListView.as_view(), name='team_list'),

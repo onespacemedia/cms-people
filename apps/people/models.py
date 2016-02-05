@@ -1,22 +1,21 @@
-""" Models used by the people app """
-from django.db import models
-
-from cms.models import SearchMetaBase, HtmlField
-from cms.apps.pages.models import ContentBase, PageBase, Page
 from cms.apps.media.models import ImageRefField
+from cms.apps.pages.models import ContentBase, Page, PageBase
+from cms.models import HtmlField, SearchMetaBase
+from django.db import models
 
 
 class Team(PageBase):
-    """ A team for Person's to be a part of """
 
     content_primary = HtmlField(
         "primary content",
         blank=True
     )
 
+    def __unicode__(self):
+        return self.__str__()
+
 
 class People(ContentBase):
-    """ A base for Person's """
 
     # The heading that the admin places this content under.
     classifier = "apps"
@@ -36,9 +35,11 @@ class People(ContentBase):
         null=True
     )
 
+    def __unicode__(self):
+        return self.__str__()
+
 
 class Person(SearchMetaBase):
-    """ A person """
 
     page = models.ForeignKey(
         Page
@@ -135,13 +136,6 @@ class Person(SearchMetaBase):
         )
 
     def get_absolute_url(self):
-        """ Gets the url of Person
-
-        Returns:
-            url of Person
-
-        """
-        return "{}{}/".format(
-            self.page.get_absolute_url(),
-            self.url_title
-        )
+        return self.page.page.reverse('person', kwargs={
+            'person_title': self.url_title,
+        })

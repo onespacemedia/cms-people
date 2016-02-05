@@ -1,4 +1,3 @@
-""" Template tags used by the people module. """
 from django import template
 
 from ..models import Person
