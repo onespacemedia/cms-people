@@ -36,7 +36,7 @@ class People(ContentBase):
     )
 
     def __unicode__(self):
-        return self.__str__()
+        return self.page.title
 
 
 class Person(SearchMetaBase):
