@@ -5,23 +5,21 @@ from django.db import models
 
 
 class Team(PageBase):
-
     content_primary = HtmlField(
-        "primary content",
+        'primary content',
         blank=True
     )
 
     def __unicode__(self):
-        return self.__str__()
+        return self.title
 
 
 class People(ContentBase):
-
     # The heading that the admin places this content under.
-    classifier = "apps"
+    classifier = 'apps'
 
     # The urlconf used to power this content's views.
-    urlconf = "{{ project_name }}.apps.people.urls"
+    urlconf = '{{ project_name }}.apps.people.urls'
 
     standfirst = models.TextField(
         blank=True,
@@ -29,7 +27,7 @@ class People(ContentBase):
     )
 
     per_page = models.IntegerField(
-        "people per page",
+        'people per page',
         default=5,
         blank=True,
         null=True
@@ -40,9 +38,8 @@ class People(ContentBase):
 
 
 class Person(SearchMetaBase):
-
     page = models.ForeignKey(
-        Page
+        People
     )
 
     title = models.CharField(
@@ -92,7 +89,7 @@ class Person(SearchMetaBase):
     )
 
     url_title = models.CharField(
-        "URL title",
+        'URL title',
         max_length=256,
         unique=True
     )
@@ -126,11 +123,11 @@ class Person(SearchMetaBase):
     )
 
     class Meta:
-        ordering = ('order',)
-        verbose_name_plural = "people"
+        ordering = ['order']
+        verbose_name_plural = 'people'
 
     def __unicode__(self):
-        return u"{} {}".format(
+        return u'{} {}'.format(
             self.first_name,
             self.last_name
         )

@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 
-{% block content_primary %}
-
+{% block main %}
   {{ person.first_name }}
   {{ person.last_name }}
   {{ person.url_title }}
@@ -21,5 +20,4 @@
   {% if person.twitter_username %}
     {{ person.twitter_username }}
   {% endif %}
-
-{% endblock content_primary %}
+{% endblock %}

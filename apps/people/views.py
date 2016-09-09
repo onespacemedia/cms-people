@@ -7,7 +7,6 @@ class PersonListView(ListView):
     model = Person
 
     def get_paginate_by(self, queryset):
-        """Returns the number of jobs to show per page."""
         return self.request.pages.current.content.per_page
 
 
