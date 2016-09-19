@@ -1,5 +1,5 @@
 from cms.apps.media.models import ImageRefField
-from cms.apps.pages.models import ContentBase, Page, PageBase
+from cms.apps.pages.models import ContentBase, PageBase
 from cms.models import HtmlField, SearchMetaBase
 from django.db import models
 

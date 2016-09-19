@@ -14,7 +14,7 @@ class PersonAdmin(SearchMetaBaseAdmin):
             'fields': ['page']
         }),
         ('Name information', {
-            'fields': ['title', 'first_name', 'middle_name','last_name', 'url_title']
+            'fields': ['title', 'first_name', 'middle_name', 'last_name', 'url_title']
         }),
         ('Additional information', {
             'fields': ['photo', 'job_title', 'bio', 'teams', 'order']
