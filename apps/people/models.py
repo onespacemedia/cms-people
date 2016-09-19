@@ -74,7 +74,6 @@ class Person(SearchMetaBase):
 
     teams = models.ManyToManyField(
         Team,
-        null=True,
         blank=True
     )
 
@@ -133,6 +132,6 @@ class Person(SearchMetaBase):
         )
 
     def get_absolute_url(self):
-        return self.page.reverse('person', kwargs={
+        return self.page.page.reverse('person', kwargs={
             'person_title': self.url_title,
         })

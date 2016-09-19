@@ -25,7 +25,7 @@ class ApplicationTestCase(TestCase):
             )
 
         self.person = Person.objects.create(
-            page=self.page,
+            page=self.person_page,
             url_title='foo-bar',
             first_name='Foo',
             last_name='Bar',
