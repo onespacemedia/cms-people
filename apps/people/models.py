@@ -74,7 +74,6 @@ class Person(SearchMetaBase):
 
     teams = models.ManyToManyField(
         Team,
-        null=True,
         blank=True
     )
 
