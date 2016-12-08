@@ -126,10 +126,9 @@ class Person(SearchMetaBase):
         verbose_name_plural = 'people'
 
     def __unicode__(self):
-        return u'{} {}'.format(
-            self.first_name,
-            self.last_name
-        )
+        fields = ['title', 'first_name', 'middle_name', 'last_name']
+        parts = [getattr(self, field) for field in fields if getattr(self, field)]
+        return u' '.join(parts)
 
     def get_absolute_url(self):
         return self.page.page.reverse('person', kwargs={
