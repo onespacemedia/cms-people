@@ -1,7 +1,7 @@
 from cms.admin import PageBaseAdmin, SearchMetaBaseAdmin
 from django.contrib import admin
 
-from .models import Person, Team
+from .models import People, Person, Team
 
 
 @admin.register(Person)
@@ -25,6 +25,14 @@ class PersonAdmin(SearchMetaBaseAdmin):
         SearchMetaBaseAdmin.PUBLICATION_FIELDS,
         SearchMetaBaseAdmin.SEO_FIELDS,
     )
+
+    def get_form(self, request, obj=None, **kwargs):
+        form = super(PersonAdmin, self).get_form(request, obj, **kwargs)
+        try:
+            form.base_fields['page'].initial = People.objects.all()[0]
+        except IndexError:
+            pass
+        return form
 
 
 @admin.register(Team)
