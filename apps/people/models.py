@@ -134,3 +134,14 @@ class Person(SearchMetaBase):
         return self.page.page.reverse('person', kwargs={
             'person_title': self.url_title,
         })
+
+    def get_twitter_url(self):
+        twitter_username = self.twitter_username
+
+        if twitter_username.startswith('http://') or twitter_username.startswith('https://'):
+            return self.twitter_username
+
+        if self.twitter_username.startswith('@'):
+            twitter_username = twitter_username[1:]
+
+        return u"https://twitter.com/{}".format(twitter_username)
