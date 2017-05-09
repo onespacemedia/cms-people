@@ -87,8 +87,8 @@ class Person(SearchMetaBase):
         null=True
     )
 
-    url_title = models.CharField(
-        'URL title',
+    slug = models.CharField(
+        'slug',
         max_length=256,
         unique=True
     )
@@ -99,13 +99,7 @@ class Person(SearchMetaBase):
         null=True
     )
 
-    linkedin_username = models.CharField(
-        max_length=100,
-        blank=True,
-        null=True
-    )
-
-    skype_username = models.CharField(
+    linkedin_url = models.URLField(
         max_length=100,
         blank=True,
         null=True
@@ -132,7 +126,7 @@ class Person(SearchMetaBase):
 
     def get_absolute_url(self):
         return self.page.page.reverse('person', kwargs={
-            'person_title': self.url_title,
+            'slug': self.slug,
         })
 
     def get_twitter_url(self):

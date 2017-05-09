@@ -3,18 +3,14 @@
 {% block main %}
   {{ person.first_name }}
   {{ person.last_name }}
-  {{ person.url_title }}
+  {{ person.slug }}
 
   {% if person.email %}
     {{ person.email }}
   {% endif %}
 
-  {% if person.linkedin_username %}
-    {{ person.linkedin_username }}
-  {% endif %}
-
-  {% if person.skype_username %}
-    {{ person.skype_username }}
+  {% if person.linkedin_url %}
+    {{ person.linkedin_url }}
   {% endif %}
 
   {% if person.twitter_username %}

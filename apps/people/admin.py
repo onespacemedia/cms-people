@@ -6,7 +6,7 @@ from .models import People, Person, Team
 
 @admin.register(Person)
 class PersonAdmin(SearchMetaBaseAdmin):
-    prepopulated_fields = {'url_title': ['first_name', 'last_name']}
+    prepopulated_fields = {'slug': ['first_name', 'last_name']}
     filter_horizontal = ['teams']
 
     fieldsets = (
@@ -14,13 +14,13 @@ class PersonAdmin(SearchMetaBaseAdmin):
             'fields': ['page']
         }),
         ('Name information', {
-            'fields': ['title', 'first_name', 'middle_name', 'last_name', 'url_title']
+            'fields': ['title', 'first_name', 'middle_name', 'last_name', 'slug']
         }),
         ('Additional information', {
             'fields': ['photo', 'job_title', 'bio', 'teams', 'order']
         }),
         ('Contact details', {
-            'fields': ['email', 'linkedin_username', 'skype_username', 'twitter_username']
+            'fields': ['email', 'linkedin_url', 'twitter_username']
         }),
         SearchMetaBaseAdmin.PUBLICATION_FIELDS,
         SearchMetaBaseAdmin.SEO_FIELDS,
