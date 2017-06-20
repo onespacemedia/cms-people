@@ -1,9 +1,11 @@
 {% extends "base.html" %}
 
 {% block main %}
-  {% for person in object_list %}
-    <a href="{{ person.get_absolute_url() }}">{{ person }}</a>
-  {% else %}
-    <p>There have been no people added yet.</p>
-  {% endfor %}
+  <ul>
+    {% for person in person_list %}
+      <li>{{ person }}</li>
+    {% else %}
+      <li>No people</li>
+    {% endfor %}
+  </ul>
 {% endblock %}

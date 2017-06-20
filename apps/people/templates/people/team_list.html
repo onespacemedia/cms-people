@@ -1,9 +1,0 @@
-{% extends "base.html" %}
-
-{% block main %}
-  {% for team in team_list %}
-    <a href="{{ pages.current.get_absolute_url() }}team/{{ team.slug }}">{{ team.title }}</a>
-  {% else %}
-    <p>There have been no teams added yet.</p>
-  {% endfor %}
-{% endblock %}

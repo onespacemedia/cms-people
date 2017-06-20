@@ -4,48 +4,40 @@ from cms.models import HtmlField, SearchMetaBase
 from django.db import models
 
 
-class Team(PageBase):
-    content_primary = HtmlField(
-        'primary content',
-        blank=True
+class Team(models.Model):
+
+    title = models.CharField(
+        max_length=255,
     )
 
-    def __unicode__(self):
+    slug = models.SlugField(
+        unique=True
+    )
+
+    def __str__(self):
         return self.title
 
 
 class People(ContentBase):
-    # The heading that the admin places this content under.
-    classifier = 'apps'
 
-    # The urlconf used to power this content's views.
+    classifier = 'apps'
     urlconf = '{{ project_name }}.apps.people.urls'
 
-    standfirst = models.TextField(
-        blank=True,
-        null=True
-    )
-
-    per_page = models.IntegerField(
+    per_page = models.PositiveIntegerField(
         'people per page',
-        default=5,
+        default=10,
         blank=True,
         null=True
     )
 
-    def __unicode__(self):
+    def __str__(self):
         return self.page.title
 
 
-class Person(SearchMetaBase):
+class Person(PageBase):
+
     page = models.ForeignKey(
         People
-    )
-
-    title = models.CharField(
-        max_length=256,
-        null=True,
-        blank=True
     )
 
     first_name = models.CharField(
@@ -72,9 +64,10 @@ class Person(SearchMetaBase):
         blank=True
     )
 
-    teams = models.ManyToManyField(
-        Team,
-        blank=True
+    team = models.ForeignKey(
+        'Team',
+        blank=True,
+        null=True,
     )
 
     photo = ImageRefField(
@@ -85,12 +78,6 @@ class Person(SearchMetaBase):
     bio = HtmlField(
         blank=True,
         null=True
-    )
-
-    slug = models.CharField(
-        'slug',
-        max_length=256,
-        unique=True
     )
 
     email = models.CharField(
@@ -119,13 +106,14 @@ class Person(SearchMetaBase):
         ordering = ['order']
         verbose_name_plural = 'people'
 
-    def __unicode__(self):
+    def __str__(self):
         fields = ['title', 'first_name', 'middle_name', 'last_name']
         parts = [getattr(self, field) for field in fields if getattr(self, field)]
-        return u' '.join(parts)
+
+        return ' '.join(parts)
 
     def get_absolute_url(self):
-        return self.page.page.reverse('person', kwargs={
+        return self.page.page.reverse('person_detail', kwargs={
             'slug': self.slug,
         })
 
@@ -138,4 +126,15 @@ class Person(SearchMetaBase):
         if self.twitter_username.startswith('@'):
             twitter_username = twitter_username[1:]
 
-        return u"https://twitter.com/{}".format(twitter_username)
+        return f'https://twitter.com/{twitter_username}'
+
+    def get_linkedin_url(self):
+        linkedin_username = self.linkedin_username
+
+        if linkedin_username.startswith('http://') or linkedin_username.startswith('https://'):
+            return self.linked_username
+
+        if linkedin_username.startswith('@'):
+            linkedin_username = linkedin_username[1:]
+
+        return f'https://www.linkedin.com/in/{linkedin_username}'

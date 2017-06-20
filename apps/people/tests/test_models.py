@@ -12,7 +12,7 @@ class ApplicationTestCase(TestCase):
         # Note: as this is the only page in the database, it's absolute URL
         # will simply be '/'
 
-        with search.updated_index():
+        with search.update_index():
             content_type = ContentType.objects.get_for_model(People)
             self.page = Page.objects.create(
                 content_type=content_type,
@@ -35,4 +35,4 @@ class ApplicationTestCase(TestCase):
         self.assertEqual(self.person.get_absolute_url(), '/foo-bar/')
 
     def test_person_unicode(self):
-        self.assertEqual(self.person.__unicode__(), 'Foo Bar')
+        self.assertEqual(self.person.__str__(), 'Foo Bar')

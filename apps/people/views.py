@@ -1,6 +1,6 @@
 from django.views.generic import DetailView, ListView
 
-from .models import Person, Team
+from .models import Person
 
 
 class PersonListView(ListView):
@@ -11,16 +11,9 @@ class PersonListView(ListView):
 
     def get_queryset(self):
         queryset = super(PersonListView, self).get_queryset()
+
         return queryset.filter(page__page=self.request.pages.current)
 
 
 class PersonView(DetailView):
     model = Person
-
-
-class TeamListView(ListView):
-    model = Team
-
-
-class TeamView(DetailView):
-    model = Team
