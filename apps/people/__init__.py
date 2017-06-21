@@ -1,1 +1,1 @@
-default_app_config = "{{ project_name }}.apps.faqs.apps.PeopleConfig"
+default_app_config = "{{ project_name }}.apps.people.apps.PeopleConfig"
