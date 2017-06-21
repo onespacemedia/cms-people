@@ -1,7 +1,9 @@
+from cms import sitemaps
 from cms.apps.media.models import ImageRefField
 from cms.apps.pages.models import ContentBase, PageBase
 from cms.models import HtmlField, SearchMetaBase
 from django.db import models
+from historylinks import shortcuts as historylinks
 
 
 class Team(models.Model):
@@ -138,3 +140,6 @@ class Person(PageBase):
             linkedin_username = linkedin_username[1:]
 
         return f'https://www.linkedin.com/in/{linkedin_username}'
+
+historylinks.register(Person)
+sitemaps.register(Person)
