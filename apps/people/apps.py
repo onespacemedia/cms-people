@@ -4,7 +4,7 @@ from watson import search as watson
 
 
 class PeopleConfig(AppConfig):
-    name = 'people'
+    name = '{{ project_name }}.apps.people'
 
     def ready(self):
         Person = self.get_model('Person')
